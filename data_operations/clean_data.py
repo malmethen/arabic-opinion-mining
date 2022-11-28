@@ -3,7 +3,6 @@ import re
 import string
 from emoji import replace_emoji
 from pyarabic.araby import strip_tatweel
-from operator import itemgetter
 
 data_file = open('dataset.json')
 data = json.load(data_file)
@@ -101,43 +100,9 @@ def remove_punctuations():
     with open('dataset.json', 'w') as ds_write:
         ds_write.write(json.dumps(data, ensure_ascii= False))
 
-def merge_files():
-    """ In case of multiple json files, this function combines them into a single json file. """
-
-    data = data1 + data2
-
-    with open('dataset_final.json', 'w') as ds_write:
-        ds_write.write(json.dumps(data, ensure_ascii= False))
-    
-    print(len(data))
-
-def sort_items():
-    """ Sorts the reviews in descending order. """
-
-    sorted_data = sorted(data, key=itemgetter('stars'), reverse=True)
-
-    with open('dataset_old.json', 'w') as ds_write:
-        ds_write.write(json.dumps(sorted_data, ensure_ascii= False))
-
-def count():
-    """ Counts number of reviews. """
-    print(len(data)) # 5693
-
-    pos_reviews = sum(x.get("sentiment") == "positive" for x in data) 
-    print(pos_reviews) # 2465
-
-    neu_reviews = sum(x.get("sentiment") == "neutral" for x in data)
-    print(neu_reviews) # 741
-
-    neg_reviews = sum(x.get("sentiment") == "negative" for x in data)
-    print(neg_reviews) # 2487
-
 # init_processing()
 # del_empty_reviews()
 # clean_text()
 # remove_punctuations()
-# merge_files()
-# sort_items()
-# count()
 
 data_file.close()

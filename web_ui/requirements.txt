@@ -1,6 +1,0 @@
-flask
-python-dotenv
-joblib
-json
-emoji
-pyarabic
